@@ -1,14 +1,15 @@
 from lexer import Lexer, EOF, TokenType
+from parse import Parser
 
 
 def main():
-    source = "IF+-123 foo*THEN/"
-    lexer = Lexer(source)
+    with open("input.txt", "r") as fp:
+        source = fp.read()
 
-    token = lexer.get_token()
-    while token.kind != TokenType.EOF:
-        print(token.kind)
-        token = lexer.get_token()
+    lexer = Lexer(source)
+    parser = Parser(lexer)
+    parser.program()
+    print("Parsing completed.")
 
 
 main()
